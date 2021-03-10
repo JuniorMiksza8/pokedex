@@ -1,0 +1,19 @@
+.fallbackcontainer {
+  width          : 100vw;
+  height         : 100vh;
+  display        : flex;
+  align-items    : center;
+  justify-content: center;
+  flex-direction : column;
+}
+
+.pokecontainer {
+  background-image   : url('../public/wallpaper.png');
+  background-position: center;
+  width              : 100vw;
+  height             : 100vh;
+  display            : flex;
+  align-items        : center;
+  justify-content    : center;
+  padding            : 1rem;
+}

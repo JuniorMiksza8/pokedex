@@ -1,0 +1,28 @@
+.searchgroup {
+  display        : flex;
+  align-items    : center;
+  justify-content: center;
+  position       : relative;
+  gap            : 1rem;
+  width          : 100%;
+  max-width      : 500px;
+}
+
+.searchgroup button {
+  background: none;
+  border    : none;
+  position  : absolute;
+  right     : 8px;
+  outline   : none;
+  color     : var(--blue);
+}
+
+.searchgroup input {
+  border       : none;
+  width        : 100%;
+  max-width    : 500px;
+  height       : 35px;
+  outline      : none;
+  border-radius: 8px;
+  padding-left : 1rem;
+}

@@ -1,0 +1,49 @@
+.container {
+  width          : 100vw;
+  height         : 100vh;
+  display        : flex;
+  align-items    : center;
+  justify-content: center;
+  flex-direction : column;
+}
+
+.container h1 {
+  color: var(--text);
+  margin-bottom: 2rem;
+}
+
+.imagecontainer {
+  width     : 100%;
+  max-width : 250px;
+  height    : 100%;
+  max-height: 250px;
+  position  : relative;
+}
+
+.btncontainer {
+  width          : 100%;
+  max-width      : 800px;
+  display        : flex;
+  align-items    : center;
+  justify-content: space-around;
+  flex-wrap      : wrap;
+  margin-top     : 3rem;
+}
+
+.btncontainer>button {
+  width        : 100%;
+  max-width    : 100px;
+  height       : 35px;
+  border       : none;
+  background   : var(--blue);
+  color        : var(--white);
+  border-radius: 4px;
+}
+
+.btncontainer input {
+  min-width: 100px;
+}
+
+.icon {
+  margin-right: 0.5rem;
+}
