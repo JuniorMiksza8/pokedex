@@ -8,12 +8,22 @@
 }
 
 .pokecontainer {
-  background-image   : url('../public/wallpaper.png');
-  background-position: center;
-  width              : 100vw;
-  height             : 100vh;
-  display            : flex;
-  align-items        : center;
-  justify-content    : center;
-  padding            : 1rem;
+  background-image     : url('../public/wallpaper.png');
+  background-position  : center;
+  background-attachment: fixed;
+  display              : flex;
+  align-items          : center;
+  justify-content      : center;
+  padding              : 1rem;
+}
+
+.gobackbtn {
+  position     : fixed;
+  top          : 2rem;
+  left         : 2rem;
+  border-radius: 50%;
+  border       : none;
+  color        : var(--white);
+  background   : transparent;
+  font-size: 2.5rem;
 }

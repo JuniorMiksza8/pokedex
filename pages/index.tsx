@@ -1,5 +1,3 @@
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Head from 'next/head'
 import PokeCarousel from '../components/PokeCarousel'
 import SearchField from '../components/SearchField'
@@ -23,6 +21,14 @@ export default function Home({ pokemons }) {
     <div className={classes.container} >
       <Head>
         <title>Pokedéx</title>
+        <meta property="og:title" content={`Pokédex`} />
+        <meta property="og:url" content={'https://pokedex-lyart-nine.vercel.app/'} />
+        <meta property="og:description" content={'Simples pokedex,procure seus pokemons'} />
+        <meta property="og:image" content={'pokelogo.png'} />
+        <meta property="og:type" content="article" />
+        <meta property="og:locale" content="pt_BR" />
+        <meta property="og:locale:alternate" content="en_US" />
+        <link rel="shortcut icon" href={`pokelogo.png`} type="image/x-icon" />
       </Head>
       <header>
         <img src="pokelogo.png" alt="pokemon logo" />
@@ -31,7 +37,6 @@ export default function Home({ pokemons }) {
           <SearchField />
         </div>
       </header>
-      <h1>Pokemons em destaque</h1>
       <PokeCarousel pokemons={pokemons} />
     </div>
   )

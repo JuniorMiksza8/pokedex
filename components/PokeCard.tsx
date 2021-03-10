@@ -35,8 +35,21 @@ const status = {
 
 export default function PokeCard({ pokemon }) {
   return (
-    <div className={classes.card} >
-      <div className={classes.spritecontainer}>
+    <div
+      className={classes.card}
+      onMouseOver={(e) => {
+        e.currentTarget.style.borderColor = colours[pokemon.types[0].type.name]
+      }}
+      onMouseLeave={(e)=>{
+        e.currentTarget.style.borderColor = '#ccc'
+      }}
+    >
+      <div
+        className={classes.spritecontainer}
+        style={{
+          background: pokemon.types.length > 0 ? hexToRgb(colours[pokemon.types[0].type.name], 0.2) : 'rgba(0,0,0,0.1)'
+        }}
+      >
         <Image
           src={pokemon.sprites.other.dream_world.front_default}
           alt={`${pokemon.name} sprite`}

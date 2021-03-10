@@ -33,7 +33,15 @@ export async function getPokemonSpecies(name: any) {
 export async function getPokemonCharacteristics(id: any) {
   try {
     const { data } = await api.get(`${process.env.API_URL}/characteristic/${id}/`)
-    console.log(data)
+    return data
+  } catch (error) {
+    return null
+  }
+}
+
+export async function getPokemonEvolutions(url) {
+  try {
+    const { data } = await api.get(url)
     return data
   } catch (error) {
     return null
