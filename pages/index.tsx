@@ -22,7 +22,7 @@ export default function Home({ pokemons }) {
       <Head>
         <title>Pokedéx</title>
         <meta property="og:title" content={`Pokédex`} />
-        <meta property="og:url" content={'https://pokedex-lyart-nine.vercel.app/'} />
+        <meta property="og:url" content={"https://pokedex-lyart-nine.vercel.app"} />
         <meta property="og:description" content={'Simples pokedex,procure seus pokemons'} />
         <meta property="og:image" content={'pokelogo.png'} />
         <meta property="og:type" content="article" />

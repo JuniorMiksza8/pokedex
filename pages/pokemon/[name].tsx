@@ -95,7 +95,7 @@ export default function PokeProfile({ pokemon, species, evolutions }) {
             <Head>
               <title>{pokemon.name} | Pokédex </title>
               <meta property="og:title" content={`${pokemon.name} | Pokédex`} />
-              <meta property="og:url" content={`https://pokedex-lyart-nine.vercel.app/pokemon/${pokemon.name}`} />
+              <meta property="og:url" content={"https://pokedex-lyart-nine.vercel.app/"} />
               <meta property="og:description" content={String(species.flavor_text_entries[0].flavor_text).substr(0, 65)} />
               <meta property="og:image" content={pokemon.sprites.other.dream_world.front_default} />
               <meta property="og:type" content="profile" />
