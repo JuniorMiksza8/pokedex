@@ -40,7 +40,7 @@ export default function PokeCard({ pokemon }) {
       onMouseOver={(e) => {
         e.currentTarget.style.borderColor = colours[pokemon.types[0].type.name]
       }}
-      onMouseLeave={(e)=>{
+      onMouseLeave={(e) => {
         e.currentTarget.style.borderColor = '#ccc'
       }}
     >
@@ -77,10 +77,7 @@ export default function PokeCard({ pokemon }) {
         {
           pokemon.stats.filter(value => status[value.stat.name]).map((value) => (
             <React.Fragment key={value.stat.name}>
-              <ReactTooltip id={value.stat.name} backgroundColor="rgba(0,0,0,0.5)" >
-                {value.stat.name}
-              </ReactTooltip>
-              <div className={classes.statscolumn} data-tip={value.stat.name} data-for={value.stat.name}>
+              <div className={classes.statscolumn} data-tip={value.stat.name} data-for={`${pokemon.name}-${value.stat.name}`}>
                 <Image
                   src={`/icons/${status[value.stat.name]}`}
                   alt={value.stat.name}
@@ -89,6 +86,12 @@ export default function PokeCard({ pokemon }) {
                 />
                 <p>{value.base_stat}</p>
               </div>
+              <ReactTooltip
+                backgroundColor="rgba(0,0,0,0.8)"
+                id={`${pokemon.name}-${value.stat.name}`}
+                place="top"
+                offset={{ top: 25 }}
+              />
             </React.Fragment>
           ))
         }

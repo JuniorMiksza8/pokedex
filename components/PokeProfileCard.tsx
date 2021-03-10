@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import classes from '../styles/PokeProfileCard.module.css'
 import Image from 'next/image'
-import PokeCard, { colours } from '../components/PokeCard'
+import { colours } from '../components/PokeCard'
 import hexToRgb from '../helpers/hexToRgb'
 import types from '../helpers/type'
 import StatsChart from './StatsChart'
@@ -75,30 +75,26 @@ export default function PokeProfileCard({ pokemon, species, evolutions }) {
           <div className={classes.evolutionscontainer} >
             {
               evolutions.map((evolution) => (
-                <React.Fragment key={evolution.name}>
-                  <ReactTooltip
-                    id={evolution.name}
-                  >
-                    {evolution.name}
-                  </ReactTooltip>
-                  <Link
-                    href={`/pokemon/${evolution.name}`}
-                    data-tip={evolution.name}
-                    data-for={evolution.name}
-                  >
-                    <a>
-                      <p className={classes.evolutionname} >{evolution.name}</p>
-                      <div className={classes.evo} >
-                        <div className={classes.evoimg} >
-                          <Image
-                            src={evolution.sprites.other.dream_world.front_default}
-                            layout="fill"
-                          />
-                        </div>
+                <Link
+                  key={evolution.name}
+                  href={`/pokemon/${evolution.name}`}
+                >
+                  <a>
+                    <p className={classes.evolutionname} >{evolution.name}</p>
+                    <div className={classes.evo} >
+                      <div className={classes.evoimg} >
+                        {
+                          evolution.sprites.other.dream_world.front_default || evolution.sprites.other['official-artwork'].front_default ? (
+                            <Image
+                              src={evolution.sprites.other.dream_world.front_default || evolution.sprites.other['official-artwork'].front_default}
+                              layout="fill"
+                            />
+                          ) : ''
+                        }
                       </div>
-                    </a>
-                  </Link>
-                </React.Fragment>
+                    </div>
+                  </a>
+                </Link>
               ))
             }
           </div>

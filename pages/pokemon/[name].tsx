@@ -9,6 +9,8 @@ import NotFound from '../../components/NotFound'
 import PokeProfileCard from '../../components/PokeProfileCard'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import sharp from 'sharp'
+import getBuffer from '../../helpers/getBuffer'
 
 function filterEvolution(evolutions) {
   var evoChain = [];
@@ -39,6 +41,13 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const { name } = context.params
 
   const pokemon = await getPokemon(name)
+  if (!pokemon) {
+    return {
+      props: {
+        pokemon: null,
+      }
+    }
+  }
   const species = await getPokemonSpecies(name)
   const evolutionsRaw = await getPokemonEvolutions(species.evolution_chain.url)
 
@@ -48,13 +57,20 @@ export const getStaticProps: GetStaticProps = async (context) => {
     return await getPokemon(value.species_name)
   }))
 
+
+  const base64 = pokemon ? await getBuffer(pokemon.sprites.other.dream_world.front_default) : ''
+
+  const image = pokemon ? (await sharp(base64).resize(1200, 600, { fit: 'fill' }).toBuffer()).toString('base64') : ''
+
   return {
     props: {
       pokemon,
       species,
       evolutions,
+      image
     },
   }
+
 }
 
 export const getStaticPaths: GetStaticPaths = async (context) => {
@@ -70,7 +86,7 @@ export const getStaticPaths: GetStaticPaths = async (context) => {
   }
 }
 
-export default function PokeProfile({ pokemon, species, evolutions }) {
+export default function PokeProfile({ pokemon, species, evolutions, image }) {
   const router = useRouter()
   const { isFallback } = router
 
@@ -95,10 +111,12 @@ export default function PokeProfile({ pokemon, species, evolutions }) {
             <Head>
               <title>{pokemon.name} | Pokédex </title>
               <meta property="og:title" content={`${pokemon.name} | Pokédex`} />
-              <meta property="og:url" content={`https://pokedex-lyart-nine.vercel.app/pokemon/${pokemon.name}`} />
-              <meta property="og:description" content={String(species.flavor_text_entries[0].flavor_text).substr(0, 65)} />
-              <meta property="og:image" content={pokemon.sprites.other.dream_world.front_default} />
-              <meta property="og:type" content="profile" />
+              <meta property="og:url" content={"https://pokedex-lyart-nine.vercel.app/"} />
+              <meta property="og:description" content={`${species.flavor_text_entries[0].flavor_text}`} />
+              <meta property="og:image" content={`data:image/png;base64, ${image}`} />
+              <meta property="og:image:width" content="1200" />
+              <meta property="og:image:height" content="600" />
+              <meta property="og:type" content="game" />
               <meta property="og:locale" content="pt_BR" />
               <meta property="og:locale:alternate" content="en_US" />
               <link rel="shortcut icon" href={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`} type="image/x-icon" />
