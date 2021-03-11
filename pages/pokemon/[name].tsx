@@ -60,7 +60,7 @@ export default function PokeProfile({ pokemon, species, evolutions }) {
             <Head>
               <title>{pokemon.name} | Pokédex </title>
               <meta property="og:title" content={`${pokemon.name} | Pokédex`} />
-              <meta property="og:url" content={`${process.env.NEXT_PUBLIC_VERCEL_URL}${router.asPath}`} />
+              <meta property="og:url" content={`${process.env.VERCEL_URL}${router.asPath}`} />
               <meta property="og:description" content={species.flavor_text_entries[0].flavor_text} />
               <meta property="og:image" content={pokemon.sprites.other['official-artwork'].front_default} />
               <meta property="og:image:width" content="475" />
