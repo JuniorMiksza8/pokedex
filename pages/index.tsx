@@ -7,22 +7,22 @@ import classes from '../styles/Home.module.css'
 export async function getStaticProps() {
 
   const pokemons = await getPokemons()
-
+  
   return {
     props: {
-      pokemons
+      pokemons,
     }
   }
 }
 
-export default function Home({ pokemons }) {
+export default function Home({ pokemons, url }) {
 
   return (
     <div className={classes.container} >
       <Head>
         <title>Pokedéx</title>
         <meta property="og:title" content={`Pokédex`} />
-        <meta property="og:url" content={"https://pokedex-lyart-nine.vercel.app"} />
+        <meta property="og:url" content={process.env.NEXT_PUBLIC_VERCEL_URL} />
         <meta property="og:description" content={'Simples pokedex,procure seus pokemons'} />
         <meta property="og:image" content={'pokelogo.png'} />
         <meta property="og:type" content="article" />
