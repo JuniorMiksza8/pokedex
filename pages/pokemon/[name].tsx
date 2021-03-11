@@ -35,6 +35,66 @@ function filterEvolution(evolutions) {
 }
 
 
+export default function PokeProfile({ pokemon, species, evolutions }) {
+  const router = useRouter()
+  const { isFallback } = router
+
+  if (isFallback) {
+    return (
+      <div className={classes.fallbackcontainer} >
+        <h1>Buscando pokemon</h1>
+        <Image
+          src="/pokeload.gif"
+          height="200px"
+          width="200px"
+        />
+      </div>
+    )
+  }
+
+  return (
+    <div>
+      {
+        pokemon ? (
+          <>
+            <Head>
+              <title>{pokemon.name} | Pokédex </title>
+              <meta property="og:title" content={`${pokemon.name} | Pokédex`} />
+              <meta property="og:url" content={`${process.env.NEXT_PUBLIC_VERCEL_URL}${router.asPath}`} />
+              <meta property="og:description" content={species.flavor_text_entries[0].flavor_text} />
+              <meta property="og:image" content={pokemon.sprites.other['official-artwork'].front_default} />
+              <meta property="og:image:width" content="475" />
+              <meta property="og:image:height" content="475" />
+              <meta property="og:type" content="game" />
+              <meta property="og:locale" content="pt_BR" />
+              <meta property="og:locale:alternate" content="en_US" />
+              <link rel="shortcut icon" href={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`} type="image/x-icon" />
+            </Head>
+            <span itemProp="thumbnail" itemScope itemType="http://schema.org/ImageObject">
+              <link itemProp="url" href={pokemon.sprites.other['official-artwork'].front_default} />
+            </span>
+            <div className={classes.pokecontainer} >
+              <PokeProfileCard
+                pokemon={pokemon}
+                species={species}
+                evolutions={evolutions}
+              />
+            </div>
+            <button
+              className={classes.gobackbtn}
+              onClick={() => router.replace('/')}
+            >
+              <FontAwesomeIcon icon={faArrowLeft} className={classes.icon} />
+            </button>
+          </>
+        ) : (
+            <NotFound />
+          )
+      }
+    </div>
+  )
+}
+
 export const getStaticProps: GetStaticProps = async (context) => {
   const { name } = context.params
 
@@ -64,6 +124,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
   }
 }
 
+
+
 export const getStaticPaths: GetStaticPaths = async (context) => {
   const pokemons = await getPokemons()
   const paths = pokemons.map((pokemon: any) => {
@@ -75,59 +137,4 @@ export const getStaticPaths: GetStaticPaths = async (context) => {
     paths,
     fallback: true,
   }
-}
-
-export default function PokeProfile({ pokemon, species, evolutions }) {
-  const router = useRouter()
-  const { isFallback } = router
-
-  if (isFallback) {
-    return (
-      <div className={classes.fallbackcontainer} >
-        <h1>Buscando pokemon</h1>
-        <Image
-          src="/pokeload.gif"
-          height="200px"
-          width="200px"
-        />
-      </div>
-    )
-  }
-
-  return (
-    <div>
-      {
-        pokemon ? (
-          <>
-            <Head>
-              <title>{pokemon.name} | Pokédex </title>
-              <meta property="og:title" content={`${pokemon.name} | Pokédex`} />
-              <meta property="og:url" content={`${process.env.NEXT_PUBLIC_VERCEL_URL}${router.asPath}`} />
-              <meta property="og:description" content={species.flavor_text_entries[0].flavor_text} />
-              <meta property="og:image" content={pokemon.sprites.other.dream_world.front_default} />
-              <meta property="og:type" content="game" />
-              <meta property="og:locale" content="pt_BR" />
-              <meta property="og:locale:alternate" content="en_US" />
-              <link rel="shortcut icon" href={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`} type="image/x-icon" />
-            </Head>
-            <div className={classes.pokecontainer} >
-              <PokeProfileCard
-                pokemon={pokemon}
-                species={species}
-                evolutions={evolutions}
-              />
-            </div>
-            <button
-              className={classes.gobackbtn}
-              onClick={() => router.replace('/')}
-            >
-              <FontAwesomeIcon icon={faArrowLeft} className={classes.icon} />
-            </button>
-          </>
-        ) : (
-            <NotFound />
-          )
-      }
-    </div>
-  )
 }
