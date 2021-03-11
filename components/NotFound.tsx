@@ -15,9 +15,9 @@ export default function NotFound() {
       <Head>
         <title> Pokemon nao encontrado | Pokédex </title>
         <meta property="og:title" content={"Pokemon nao encontrado | Pokédex"} />
-        <meta property="og:url" content={`${process.env.NEXT_PUBLIC_VERCEL_URL}${router.asPath}`} />
+        <meta property="og:url" content={`${process.env.VERCEL_URL}${router.asPath}`} />
         <meta property="og:description" content={"Pokemon nao encontrado | Pokédex"} />
-        <meta property="og:image" content={`${process.env.NEXT_PUBLIC_VERCEL_URL}/pokenotfound.png`} />
+        <meta property="og:image" content={`${process.env.VERCEL_URL}/pokenotfound.png`} />
         <meta property="og:type" content="game" />
         <meta property="og:locale" content="pt_BR" />
         <meta property="og:locale:alternate" content="en_US" />
