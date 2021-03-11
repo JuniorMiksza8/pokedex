@@ -39,6 +39,13 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const { name } = context.params
 
   const pokemon = await getPokemon(name)
+  if (!pokemon) {
+    return {
+      props: {
+        pokemon: null
+      }
+    }
+  }
   const species = await getPokemonSpecies(name)
   const evolutionsRaw = await getPokemonEvolutions(species.evolution_chain.url)
 
